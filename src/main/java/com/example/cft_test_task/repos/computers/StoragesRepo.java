@@ -7,23 +7,4 @@ import java.util.List;
 
 public class StoragesRepo {
 
-    public ResponseEntity<Boolean> add(){
-
-    }
-
-    public ResponseEntity<Boolean> edit(){
-
-    }
-
-    public ResponseEntity<Boolean> delete(){
-
-    }
-
-    public ResponseEntity<List<TechnicsEntity>> getByType(){
-
-    }
-
-    public ResponseEntity<TechnicsEntity> getById(){
-
-    }
 }
