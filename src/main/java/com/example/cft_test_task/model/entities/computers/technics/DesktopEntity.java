@@ -1,13 +1,13 @@
 package com.example.cft_test_task.model.entities.computers.technics;
 
-import com.example.cft_test_task.model.details.tech.laptop.LaptopDiagonal;
+import com.example.cft_test_task.model.details.tech.desktop.PCFormFactor;
 import com.example.cft_test_task.model.entities.computers.TechnicsEntity;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "laptops")
-public class LaptopEntity{
+@Table(name = "desktops")
+public class DesktopEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     public Long id;
@@ -17,5 +17,5 @@ public class LaptopEntity{
     public TechnicsEntity technicsEntity;
 
     @Column
-    public LaptopDiagonal diagonal;
+    public PCFormFactor formFactor;
 }
