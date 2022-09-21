@@ -1,5 +1,7 @@
 package com.example.cft_test_task.model.entities.computers;
 
+import com.example.cft_test_task.model.enums.tech.TechnicTypes;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 
