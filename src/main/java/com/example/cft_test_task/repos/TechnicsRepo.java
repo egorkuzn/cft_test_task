@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TechnicsRepo extends JpaRepository<TechnicsEntity, Long>{
-    TechnicTypes findTypeById(Long id);
+    TechnicsEntity findFirstBySerialNumber(Long serialNumber);
 }
