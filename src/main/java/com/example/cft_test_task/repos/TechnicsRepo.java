@@ -10,4 +10,5 @@ import java.util.List;
 @Repository
 public interface TechnicsRepo extends JpaRepository<TechnicsEntity, Long>{
     TechnicsEntity findFirstBySerialNumber(Long serialNumber);
+    void deleteFirstBySerialNumber(Long id);
 }

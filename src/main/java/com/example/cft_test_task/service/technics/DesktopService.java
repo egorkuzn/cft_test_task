@@ -3,7 +3,6 @@ package com.example.cft_test_task.service.technics;
 import com.example.cft_test_task.model.entities.computers.TechnicsEntity;
 import com.example.cft_test_task.model.entities.computers.technics.DesktopEntity;
 import com.example.cft_test_task.model.enums.tech.TechnicFields;
-import com.example.cft_test_task.model.enums.tech.TechnicTypes;
 import com.example.cft_test_task.model.enums.tech.details.desktop.PCFormFactor;
 import com.example.cft_test_task.model.rest.request.TechnicsRequest;
 import com.example.cft_test_task.model.rest.response.TechnicsResponse;
@@ -24,6 +23,7 @@ public class DesktopService extends AnyTechService{
         super(technicsRepo);
         this.desktopsRepo = desktopsRepo;
     }
+
     @Override
     public boolean add(TechnicsRequest technicsRequest) {
         DesktopEntity desktopEntity = new DesktopEntity();
@@ -59,11 +59,18 @@ public class DesktopService extends AnyTechService{
 
     @Override
     public boolean delete(Long id) {
-        return false;
+        DesktopEntity desktopEntity = desktopsRepo.findFirstByTechnicsEntity(technicsRepo.findFirstBySerialNumber(id));
+        desktopsRepo.delete(desktopEntity);
+        technicsRepo.deleteFirstBySerialNumber(id);
+        return true;
     }
+
     @Override
     public TechnicsResponse getById(Long id) {
+        DesktopEntity desktopEntity = desktopsRepo.findFirstByTechnicsEntity(technicsRepo.findFirstBySerialNumber(id));
+        return castToDesktopResponse(desktopEntity);
     }
+
     @Override
     public List<TechnicsResponse> getAll() {
         List<TechnicsResponse> technicsResponseArrayList = new ArrayList<>();
