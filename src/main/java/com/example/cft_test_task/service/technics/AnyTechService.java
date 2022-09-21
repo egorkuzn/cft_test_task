@@ -11,6 +11,10 @@ public abstract class AnyTechService {
 
     }
 
+    protected void editTechEntity(TechnicsEntity technicsEntity, String field, String value){
+
+    }
+
     public abstract boolean add(TechnicsRequest technicsRequest);
     public abstract boolean edit(Long id, String field, String variable);
     public abstract boolean delete(Long id);

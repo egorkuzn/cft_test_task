@@ -29,6 +29,7 @@ public class DesktopService extends AnyTechService{
 
     @Override
     public boolean edit(Long id, String field, String variable) {
+
         return false;
     }
     @Override
@@ -40,5 +41,6 @@ public class DesktopService extends AnyTechService{
     }
     @Override
     public List<TechnicsResponse> getAll() {
+        return desktopsRepo.findAll();
     }
 }
