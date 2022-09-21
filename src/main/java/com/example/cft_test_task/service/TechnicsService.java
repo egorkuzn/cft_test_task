@@ -1,6 +1,5 @@
 package com.example.cft_test_task.service;
 
-import com.example.cft_test_task.model.entities.computers.TechnicsEntity;
 import com.example.cft_test_task.model.enums.tech.TechnicTypes;
 import com.example.cft_test_task.model.rest.request.TechnicsRequest;
 import com.example.cft_test_task.model.rest.response.TechnicsResponse;
@@ -35,51 +34,59 @@ public class TechnicsService {
         this.storageService = storageService;
         this.technicsRepo = technicsRepo;
     }
-    public Boolean add(TechnicsRequest technicsRequest) {
+    public boolean add(TechnicsRequest technicsRequest) {
         switch (TechnicTypes.valueOf(technicsRequest.type.toUpperCase())){
-            case DESKTOP -> desktopService.add(technicsRequest);
-            case DISPLAY -> displayService.add(technicsRequest);
-            case LAPTOP -> laptopService.add(technicsRequest);
-            case STORAGE -> storageService.add(technicsRequest);
-            default -> {return false;}
+            case DESKTOP: return desktopService.add(technicsRequest);
+            case DISPLAY: return displayService.add(technicsRequest);
+            case LAPTOP: return laptopService.add(technicsRequest);
+            case STORAGE: return storageService.add(technicsRequest);
+            default: return false;
         }
-
-        return true;
     }
 
-    public Boolean edit(Long id, String field, String variable) {
+    public boolean edit(Long id, String field, String variable) {
         TechnicTypes type = technicsRepo.findTypeById(id);
 
         switch (type){
-            case DESKTOP -> desktopService.edit(id, field, variable);
-            case DISPLAY -> displayService.edit(id, field, variable);
-            case LAPTOP -> laptopService.edit(id, field, variable);
-            case STORAGE -> storageService.edit(id, field, variable);
-            default -> {return false;}
+            case DESKTOP: return desktopService.edit(id, field, variable);
+            case DISPLAY: return displayService.edit(id, field, variable);
+            case LAPTOP: return laptopService.edit(id, field, variable);
+            case STORAGE: return storageService.edit(id, field, variable);
+            default: return false;
         }
-
-        return true;
     }
 
-    public Boolean delete(Long id) {
+    public boolean delete(Long id) {
         TechnicTypes type = technicsRepo.findTypeById(id);
 
         switch (type){
-            case DESKTOP -> desktopService.delete(id);
-            case DISPLAY -> displayService.delete(id);
-            case LAPTOP -> laptopService.delete(id);
-            case STORAGE -> storageService.delete(id);
-            default -> {return false;}
+            case DESKTOP: return desktopService.delete(id);
+            case DISPLAY: return displayService.delete(id);
+            case LAPTOP: return laptopService.delete(id);
+            case STORAGE: return storageService.delete(id);
+            default: return false;
         }
-
-        return true;
     }
 
     public TechnicsResponse getById(Long id) {
-        return null;
+        TechnicTypes type = technicsRepo.findTypeById(id);
+
+        switch (type){
+            case DESKTOP: return desktopService.getById(id);
+            case DISPLAY: return displayService.getById(id);
+            case LAPTOP: return laptopService.getById(id);
+            case STORAGE: return storageService.getById(id);
+            default: return null;
+        }
     }
 
     public List<TechnicsResponse> getByType(String type) {
-        return null;
+        switch (TechnicTypes.valueOf(type.toUpperCase())){
+            case DESKTOP: return desktopService.getAll();
+            case DISPLAY: return displayService.getAll();
+            case LAPTOP: return laptopService.getAll();
+            case STORAGE: return storageService.getAll();
+            default: return null;
+        }
     }
 }
