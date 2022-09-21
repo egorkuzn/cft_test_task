@@ -26,14 +26,18 @@ public class DesktopService extends AnyTechService{
 
     @Override
     public boolean add(TechnicsRequest technicsRequest) {
-        DesktopEntity desktopEntity = new DesktopEntity();
-        TechnicsEntity technicsEntity = new TechnicsEntity();
-        initTechEntity(technicsEntity, technicsRequest);
-        desktopEntity.technicsEntity = technicsEntity;
-        desktopEntity.formFactor = PCFormFactor.valueOf(technicsRequest.specificParam.toUpperCase());
-        desktopsRepo.save(desktopEntity);
-        desktopsRepo.flush();
-        return false;
+        try {
+            DesktopEntity desktopEntity = new DesktopEntity();
+            TechnicsEntity technicsEntity = new TechnicsEntity();
+            initTechEntity(technicsEntity, technicsRequest);
+            desktopEntity.technicsEntity = technicsEntity;
+            desktopEntity.formFactor = PCFormFactor.valueOf(technicsRequest.specificParam.toUpperCase());
+            desktopsRepo.save(desktopEntity);
+            desktopsRepo.flush();
+            return true;
+        } catch (IllegalArgumentException e) {
+            return false;
+        }
     }
 
     @Override
@@ -43,10 +47,10 @@ public class DesktopService extends AnyTechService{
         try {
             TechnicFields technicField = TechnicFields.valueOf(field.toUpperCase());
 
-            switch (technicField){
-                case FORM_FACTOR: return editFormFactor(desktopEntity, variable);
-                default: return editTechEntity(desktopEntity.technicsEntity, technicField, variable);
-            }
+            return switch (technicField) {
+                case FORM_FACTOR -> editFormFactor(desktopEntity, variable);
+                default -> editTechEntity(desktopEntity.technicsEntity, technicField, variable);
+            };
         } catch (IllegalArgumentException e){
             return false;
         }
@@ -73,11 +77,11 @@ public class DesktopService extends AnyTechService{
 
     @Override
     public List<TechnicsResponse> getAll() {
-        List<TechnicsResponse> technicsResponseArrayList = new ArrayList<>();
+        List<TechnicsResponse> technicsResponseList = new ArrayList<>();
         List<DesktopEntity> desktopEntityArrayList = desktopsRepo.findAll();
 
-        desktopEntityArrayList.forEach(desktopEntity -> technicsResponseArrayList.add(castToDesktopResponse(desktopEntity)));
-        return technicsResponseArrayList;
+        desktopEntityArrayList.forEach(desktopEntity -> technicsResponseList.add(castToDesktopResponse(desktopEntity)));
+        return technicsResponseList;
     }
 
     private TechnicsResponse castToDesktopResponse(DesktopEntity desktopEntity) {
