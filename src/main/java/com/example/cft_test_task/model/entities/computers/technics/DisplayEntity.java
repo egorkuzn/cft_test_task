@@ -5,10 +5,11 @@ import com.example.cft_test_task.model.entities.computers.TechnicsEntity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "displays")
+@Table(name = "Displays")
 public class DisplayEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", nullable = false)
     public Long id;
 
     @OneToOne

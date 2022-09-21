@@ -5,11 +5,11 @@ import java.math.BigDecimal;
 
 // Serial №| Producer | Price | Count of elem
 @Entity
-@Table(name = "technics")
+@Table(name = "Technics")
 public class TechnicsEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column
+    @Column(name = "id", nullable = false)
     public Long serialNumber;
 
     @Column
