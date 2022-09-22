@@ -89,6 +89,7 @@ public class LaptopService extends AnyTechService{
         List<TechnicsResponse> technicsResponseList = new ArrayList<>();
         List<LaptopEntity> laptopEntityList = laptopsRepo.findAll();
 
-        laptopEntityList
+        laptopEntityList.forEach(laptopEntity -> technicsResponseList.add(castToTLaptopResponse(laptopEntity)));
+        return technicsResponseList;
     }
 }
