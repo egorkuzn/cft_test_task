@@ -46,7 +46,7 @@ public class DisplayService extends AnyTechService{
             TechnicFields technicField = TechnicFields.valueOf(field.toUpperCase());
 
             return switch (technicField) {
-                case DIAGONAL -> editDiagonal(displayEntity, variable);
+                case DISPLAY_DIAGONAL -> editDiagonal(displayEntity, variable);
                 default -> editTechEntity(displayEntity.technicsEntity, technicField, variable);
             };
         } catch (IllegalArgumentException e) {

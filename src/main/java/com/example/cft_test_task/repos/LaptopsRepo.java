@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface LaptopsRepo extends JpaRepository<LaptopEntity, Long> {
+    LaptopEntity findFirstByTechnicsEntity(TechnicsEntity technicsEntity);
 }

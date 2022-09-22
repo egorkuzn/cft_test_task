@@ -78,16 +78,16 @@ public class DesktopService extends AnyTechService{
     @Override
     public List<TechnicsResponse> getAll() {
         List<TechnicsResponse> technicsResponseList = new ArrayList<>();
-        List<DesktopEntity> desktopEntityArrayList = desktopsRepo.findAll();
+        List<DesktopEntity> desktopEntityList = desktopsRepo.findAll();
 
-        desktopEntityArrayList.forEach(desktopEntity -> technicsResponseList.add(castToDesktopResponse(desktopEntity)));
+        desktopEntityList.forEach(desktopEntity -> technicsResponseList.add(castToDesktopResponse(desktopEntity)));
         return technicsResponseList;
     }
 
     private TechnicsResponse castToDesktopResponse(DesktopEntity desktopEntity) {
         TechnicsResponse technicsResponse = new TechnicsResponse();
 
-        technicsResponse.specificFieldType = "form-factor";
+        technicsResponse.specificFieldType = "form_factor";
         technicsResponse.specificFieldValue = desktopEntity.formFactor.name();
 
         castToTechnicsResponse(technicsResponse, desktopEntity.technicsEntity);
