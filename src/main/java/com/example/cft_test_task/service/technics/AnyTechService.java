@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public abstract class AnyTechService {
-    TechnicsRepo technicsRepo;
+    final TechnicsRepo technicsRepo;
 
     public AnyTechService(TechnicsRepo technicsRepo){
         this.technicsRepo = technicsRepo;

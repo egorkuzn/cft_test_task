@@ -16,7 +16,7 @@ import java.util.List;
 
 @Service
 public class LaptopService extends AnyTechService{
-    LaptopsRepo laptopsRepo;
+    final LaptopsRepo laptopsRepo;
     @Autowired
     public LaptopService(LaptopsRepo laptopsRepo, TechnicsRepo technicsRepo){
         super(technicsRepo);

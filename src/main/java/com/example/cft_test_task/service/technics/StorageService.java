@@ -15,7 +15,7 @@ import java.util.List;
 
 @Service
 public class StorageService extends AnyTechService{
-    StoragesRepo storagesRepo;
+    final StoragesRepo storagesRepo;
     @Autowired
     public StorageService(StoragesRepo storagesRepo, TechnicsRepo technicsRepo){
         super(technicsRepo);

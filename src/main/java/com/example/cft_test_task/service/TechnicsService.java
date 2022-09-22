@@ -45,7 +45,7 @@ public class TechnicsService {
     }
 
     public boolean edit(Long id, String field, String variable) {
-        TechnicTypes type = technicsRepo.findTypeById(id);
+        TechnicTypes type = technicsRepo.findTypeBySerialNumber(id);
 
         switch (type){
             case DESKTOP: return desktopService.edit(id, field, variable);
@@ -57,7 +57,7 @@ public class TechnicsService {
     }
 
     public boolean delete(Long id) {
-        TechnicTypes type = technicsRepo.findTypeById(id);
+        TechnicTypes type = technicsRepo.findTypeBySerialNumber(id);
 
         switch (type){
             case DESKTOP: return desktopService.delete(id);
@@ -69,7 +69,7 @@ public class TechnicsService {
     }
 
     public TechnicsResponse getById(Long id) {
-        TechnicTypes type = technicsRepo.findTypeById(id);
+        TechnicTypes type = technicsRepo.findTypeBySerialNumber(id);
 
         switch (type){
             case DESKTOP: return desktopService.getById(id);

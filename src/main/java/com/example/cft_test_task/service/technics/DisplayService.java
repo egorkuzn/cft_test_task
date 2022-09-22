@@ -15,7 +15,7 @@ import java.util.List;
 
 @Service
 public class DisplayService extends AnyTechService{
-    DisplaysRepo displaysRepo;
+    final DisplaysRepo displaysRepo;
 
     @Autowired
     public DisplayService(DisplaysRepo displaysRepo, TechnicsRepo technicsRepo){

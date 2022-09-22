@@ -16,7 +16,7 @@ import java.util.List;
 
 @Service
 public class DesktopService extends AnyTechService{
-    DesktopsRepo desktopsRepo;
+    final DesktopsRepo desktopsRepo;
 
     @Autowired
     public DesktopService(DesktopsRepo desktopsRepo, TechnicsRepo technicsRepo){

@@ -12,7 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/technics")
 public class TechnicsController {
-    TechnicsService technicsService;
+    final TechnicsService technicsService;
 
     @Autowired
     public TechnicsController(TechnicsService technicsService){
