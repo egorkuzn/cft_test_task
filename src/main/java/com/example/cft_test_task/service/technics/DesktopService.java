@@ -41,15 +41,15 @@ public class DesktopService extends AnyTechService{
     }
 
     @Override
-    public boolean edit(Long id, String field, String variable) {
+    public boolean edit(Long id, String field, String value) {
         DesktopEntity desktopEntity = desktopsRepo.findFirstByTechnicsEntity(technicsRepo.findFirstBySerialNumber(id));
 
         try {
             TechnicFields technicField = TechnicFields.valueOf(field.toUpperCase());
 
             return switch (technicField) {
-                case FORM_FACTOR -> editFormFactor(desktopEntity, variable);
-                default -> editTechEntity(desktopEntity.technicsEntity, technicField, variable);
+                case FORM_FACTOR -> editFormFactor(desktopEntity, value);
+                default -> editTechEntity(desktopEntity.technicsEntity, technicField, value);
             };
         } catch (IllegalArgumentException e){
             return false;

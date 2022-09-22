@@ -39,15 +39,15 @@ public class LaptopService extends AnyTechService{
 
     }
     @Override
-    public boolean edit(Long id, String field, String variable) {
+    public boolean edit(Long id, String field, String value) {
         LaptopEntity laptopEntity = laptopsRepo.findFirstByTechnicsEntity(technicsRepo.findFirstBySerialNumber(id));
 
         try {
             TechnicFields technicFields = TechnicFields.valueOf(field.toUpperCase());
 
             return switch (technicFields) {
-                case LAPTOP_DIAGONAL -> editDiagonal(laptopEntity, variable);
-                default -> editTechEntity(laptopEntity.technicsEntity, technicFields, variable);
+                case LAPTOP_DIAGONAL -> editDiagonal(laptopEntity, value);
+                default -> editTechEntity(laptopEntity.technicsEntity, technicFields, value);
             };
         }
         catch (IllegalArgumentException e) {

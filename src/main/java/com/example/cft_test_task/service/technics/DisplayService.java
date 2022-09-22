@@ -39,15 +39,15 @@ public class DisplayService extends AnyTechService{
         }
     }
     @Override
-    public boolean edit(Long id, String field, String variable) {
+    public boolean edit(Long id, String field, String value) {
         DisplayEntity displayEntity = displaysRepo.findFirstByTechnicsEntity(technicsRepo.findFirstBySerialNumber(id));
 
         try {
             TechnicFields technicField = TechnicFields.valueOf(field.toUpperCase());
 
             return switch (technicField) {
-                case DISPLAY_DIAGONAL -> editDiagonal(displayEntity, variable);
-                default -> editTechEntity(displayEntity.technicsEntity, technicField, variable);
+                case DISPLAY_DIAGONAL -> editDiagonal(displayEntity, value);
+                default -> editTechEntity(displayEntity.technicsEntity, technicField, value);
             };
         } catch (IllegalArgumentException e) {
             return false;

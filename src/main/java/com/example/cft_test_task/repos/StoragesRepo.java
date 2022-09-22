@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface StoragesRepo extends JpaRepository<StorageEntity, Long> {
-
+    StorageEntity findFirstByTechnicsEntity(TechnicsEntity technicsEntity);
 }

@@ -41,7 +41,7 @@ public abstract class AnyTechService {
     }
 
     public abstract boolean add(TechnicsRequest technicsRequest);
-    public abstract boolean edit(Long id, String field, String variable);
+    public abstract boolean edit(Long id, String field, String value);
     public abstract boolean delete(Long id);
     public abstract TechnicsResponse getById(Long id);
     public abstract List<TechnicsResponse> getAll();
