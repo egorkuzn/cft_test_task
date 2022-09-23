@@ -7,9 +7,8 @@ import com.example.cft_test_task.model.entities.technics.StorageEntity;
 import com.example.cft_test_task.model.enums.tech.TechnicTypes;
 import com.example.cft_test_task.model.rest.request.TechnicsRequest;
 import com.example.cft_test_task.model.rest.response.TechnicsResponse;
-import com.example.cft_test_task.repos.TechTypeRepo;
 import com.example.cft_test_task.repos.TechnicsRepo;
-import com.example.cft_test_task.service.technics.TechTypeGenericService;
+import com.example.cft_test_task.service.technics.ServiceByTechType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,17 +17,17 @@ import java.util.List;
 @Service
 public class TechnicsService {
 
-    private final TechTypeGenericService<DesktopEntity> desktopService;
-    private final TechTypeGenericService<DisplayEntity> displayService;
-    private final TechTypeGenericService<LaptopEntity> laptopService;
-    private final TechTypeGenericService<StorageEntity> storageService;
+    private final ServiceByTechType<DesktopEntity> desktopService;
+    private final ServiceByTechType<DisplayEntity> displayService;
+    private final ServiceByTechType<LaptopEntity> laptopService;
+    private final ServiceByTechType<StorageEntity> storageService;
     private final TechnicsRepo technicsRepo;
 
     @Autowired
-    public TechnicsService(TechTypeGenericService<DesktopEntity> desktopService,
-                           TechTypeGenericService<DisplayEntity> displayService,
-                           TechTypeGenericService<LaptopEntity> laptopService,
-                           TechTypeGenericService<StorageEntity> storageService,
+    public TechnicsService(ServiceByTechType<DesktopEntity> desktopService,
+                           ServiceByTechType<DisplayEntity> displayService,
+                           ServiceByTechType<LaptopEntity> laptopService,
+                           ServiceByTechType<StorageEntity> storageService,
                            TechnicsRepo technicsRepo){
         this.desktopService = desktopService;
         this.displayService = displayService;

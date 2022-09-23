@@ -3,14 +3,10 @@ package com.example.cft_test_task.service.technics;
 import com.example.cft_test_task.model.entities.TechnicsEntity;
 import com.example.cft_test_task.model.entities.technics.*;
 import com.example.cft_test_task.model.enums.tech.TechnicFields;
-import com.example.cft_test_task.model.enums.tech.TechnicTypes;
-import com.example.cft_test_task.model.enums.tech.details.desktop.PCFormFactor;
 import com.example.cft_test_task.model.rest.request.TechnicsRequest;
 import com.example.cft_test_task.model.rest.response.TechnicsResponse;
 import com.example.cft_test_task.repos.TechTypeRepo;
 import com.example.cft_test_task.repos.TechnicsRepo;
-import com.example.cft_test_task.service.technics.AnyTechService;
-import com.fasterxml.classmate.GenericType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,11 +15,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class TechTypeGenericService<TypeEntity extends TechEntityBase> extends AnyTechService {
+public class ServiceByTechType<TypeEntity extends TechEntityBase> extends AnyTechService {
     final TechTypeRepo<TypeEntity> typeRepo;
 
     @Autowired
-    public TechTypeGenericService(TechTypeRepo<TypeEntity> typeRepo, TechnicsRepo technicsRepo){
+    public ServiceByTechType(TechTypeRepo<TypeEntity> typeRepo, TechnicsRepo technicsRepo){
         super(technicsRepo);
         this.typeRepo = typeRepo;
     }

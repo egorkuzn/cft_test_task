@@ -9,5 +9,3 @@ import org.springframework.stereotype.Repository;
 public interface TechTypeRepo <TypeEntity> extends JpaRepository<TypeEntity, TechnicsEntity> {
     TypeEntity findFirstByTechnicsEntity(TechnicsEntity technicsEntity);
 }
-
-
