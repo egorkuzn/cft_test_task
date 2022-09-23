@@ -7,7 +7,6 @@ import com.example.cft_test_task.model.enums.tech.TechnicTypes;
 import com.example.cft_test_task.model.enums.tech.details.desktop.PCFormFactor;
 import com.example.cft_test_task.model.rest.request.TechnicsRequest;
 import com.example.cft_test_task.model.rest.response.TechnicsResponse;
-import com.example.cft_test_task.repos.DesktopsRepo;
 import com.example.cft_test_task.repos.TechnicsRepo;
 import com.example.cft_test_task.service.technics.AnyTechService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -8,10 +8,6 @@ import javax.persistence.*;
 @Table
 public class TechEntityBase{
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column
-    public Long id;
-
     @OneToOne
     @JoinColumn
     public TechnicsEntity technicsEntity;

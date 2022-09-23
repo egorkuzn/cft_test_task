@@ -5,7 +5,6 @@ import com.example.cft_test_task.model.entities.technics.DisplayEntity;
 import com.example.cft_test_task.model.enums.tech.TechnicFields;
 import com.example.cft_test_task.model.rest.request.TechnicsRequest;
 import com.example.cft_test_task.model.rest.response.TechnicsResponse;
-import com.example.cft_test_task.repos.DisplaysRepo;
 import com.example.cft_test_task.repos.TechnicsRepo;
 import com.example.cft_test_task.service.technics.AnyTechService;
 import org.springframework.beans.factory.annotation.Autowired;

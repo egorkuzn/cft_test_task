@@ -6,7 +6,6 @@ import com.example.cft_test_task.model.enums.tech.TechnicFields;
 import com.example.cft_test_task.model.enums.tech.details.laptop.LaptopDiagonal;
 import com.example.cft_test_task.model.rest.request.TechnicsRequest;
 import com.example.cft_test_task.model.rest.response.TechnicsResponse;
-import com.example.cft_test_task.repos.LaptopsRepo;
 import com.example.cft_test_task.repos.TechnicsRepo;
 import com.example.cft_test_task.service.technics.AnyTechService;
 import org.springframework.beans.factory.annotation.Autowired;
