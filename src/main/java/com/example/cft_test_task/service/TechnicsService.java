@@ -1,13 +1,15 @@
 package com.example.cft_test_task.service;
 
+import com.example.cft_test_task.model.entities.technics.DesktopEntity;
+import com.example.cft_test_task.model.entities.technics.DisplayEntity;
+import com.example.cft_test_task.model.entities.technics.LaptopEntity;
+import com.example.cft_test_task.model.entities.technics.StorageEntity;
 import com.example.cft_test_task.model.enums.tech.TechnicTypes;
 import com.example.cft_test_task.model.rest.request.TechnicsRequest;
 import com.example.cft_test_task.model.rest.response.TechnicsResponse;
+import com.example.cft_test_task.repos.TechTypeRepo;
 import com.example.cft_test_task.repos.TechnicsRepo;
-import com.example.cft_test_task.service.technics.implementations.DesktopService;
-import com.example.cft_test_task.service.technics.implementations.DisplayService;
-import com.example.cft_test_task.service.technics.implementations.LaptopService;
-import com.example.cft_test_task.service.technics.implementations.StorageService;
+import com.example.cft_test_task.service.technics.TechTypeGenericService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,17 +18,17 @@ import java.util.List;
 @Service
 public class TechnicsService {
 
-    private final DesktopService desktopService;
-    private final DisplayService displayService;
-    private final LaptopService laptopService;
-    private final StorageService storageService;
+    private final TechTypeGenericService<DesktopEntity> desktopService;
+    private final TechTypeGenericService<DisplayEntity> displayService;
+    private final TechTypeGenericService<LaptopEntity> laptopService;
+    private final TechTypeGenericService<StorageEntity> storageService;
     private final TechnicsRepo technicsRepo;
 
     @Autowired
-    public TechnicsService(DesktopService desktopService,
-                           DisplayService displayService,
-                           LaptopService laptopService,
-                           StorageService storageService,
+    public TechnicsService(TechTypeGenericService<DesktopEntity> desktopService,
+                           TechTypeGenericService<DisplayEntity> displayService,
+                           TechTypeGenericService<LaptopEntity> laptopService,
+                           TechTypeGenericService<StorageEntity> storageService,
                            TechnicsRepo technicsRepo){
         this.desktopService = desktopService;
         this.displayService = displayService;
