@@ -1,4 +1,4 @@
-package com.example.cft_test_task.service.technics;
+package com.example.cft_test_task.service.technics.implementations;
 
 import com.example.cft_test_task.model.entities.computers.TechnicsEntity;
 import com.example.cft_test_task.model.entities.computers.technics.StorageEntity;
@@ -7,6 +7,7 @@ import com.example.cft_test_task.model.rest.request.TechnicsRequest;
 import com.example.cft_test_task.model.rest.response.TechnicsResponse;
 import com.example.cft_test_task.repos.StoragesRepo;
 import com.example.cft_test_task.repos.TechnicsRepo;
+import com.example.cft_test_task.service.technics.AnyTechService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class StorageService extends AnyTechService{
+public class StorageService extends AnyTechService {
     final StoragesRepo storagesRepo;
     @Autowired
     public StorageService(StoragesRepo storagesRepo, TechnicsRepo technicsRepo){

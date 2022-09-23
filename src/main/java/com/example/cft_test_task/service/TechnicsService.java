@@ -4,10 +4,10 @@ import com.example.cft_test_task.model.enums.tech.TechnicTypes;
 import com.example.cft_test_task.model.rest.request.TechnicsRequest;
 import com.example.cft_test_task.model.rest.response.TechnicsResponse;
 import com.example.cft_test_task.repos.TechnicsRepo;
-import com.example.cft_test_task.service.technics.DesktopService;
-import com.example.cft_test_task.service.technics.DisplayService;
-import com.example.cft_test_task.service.technics.LaptopService;
-import com.example.cft_test_task.service.technics.StorageService;
+import com.example.cft_test_task.service.technics.implementations.DesktopService;
+import com.example.cft_test_task.service.technics.implementations.DisplayService;
+import com.example.cft_test_task.service.technics.implementations.LaptopService;
+import com.example.cft_test_task.service.technics.implementations.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

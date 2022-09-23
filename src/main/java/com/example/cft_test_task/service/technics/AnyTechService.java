@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public abstract class AnyTechService {
-    final TechnicsRepo technicsRepo;
+    protected final TechnicsRepo technicsRepo;
 
     public AnyTechService(TechnicsRepo technicsRepo){
         this.technicsRepo = technicsRepo;
@@ -20,6 +20,8 @@ public abstract class AnyTechService {
         technicsEntity.countOfElems = technicsRequest.countOfElements;
         technicsEntity.price = technicsRequest.price;
         technicsEntity.producer = technicsRequest.producer;
+        technicsRepo.save(technicsEntity);
+        technicsRepo.flush();
     }
 
     protected boolean editTechEntity(TechnicsEntity technicsEntity, TechnicFields field, String value) throws IllegalArgumentException{
@@ -38,6 +40,10 @@ public abstract class AnyTechService {
         technicsResponse.price = technicsEntity.price;
         technicsResponse.producer = technicsEntity.producer;
         technicsResponse.serialNumber = technicsEntity.serialNumber;
+    }
+
+    protected TechnicsEntity getTechnicEntityById(Long id){
+        return technicsRepo.findFirstBySerialNumber(id);
     }
 
     public abstract boolean add(TechnicsRequest technicsRequest);

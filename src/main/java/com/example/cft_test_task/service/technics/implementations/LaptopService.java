@@ -1,4 +1,4 @@
-package com.example.cft_test_task.service.technics;
+package com.example.cft_test_task.service.technics.implementations;
 
 import com.example.cft_test_task.model.entities.computers.TechnicsEntity;
 import com.example.cft_test_task.model.entities.computers.technics.LaptopEntity;
@@ -8,6 +8,7 @@ import com.example.cft_test_task.model.rest.request.TechnicsRequest;
 import com.example.cft_test_task.model.rest.response.TechnicsResponse;
 import com.example.cft_test_task.repos.LaptopsRepo;
 import com.example.cft_test_task.repos.TechnicsRepo;
+import com.example.cft_test_task.service.technics.AnyTechService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class LaptopService extends AnyTechService{
+public class LaptopService extends AnyTechService {
     final LaptopsRepo laptopsRepo;
     @Autowired
     public LaptopService(LaptopsRepo laptopsRepo, TechnicsRepo technicsRepo){
@@ -40,7 +41,7 @@ public class LaptopService extends AnyTechService{
     }
     @Override
     public boolean edit(Long id, String field, String value) {
-        LaptopEntity laptopEntity = laptopsRepo.findFirstByTechnicsEntity(technicsRepo.findFirstBySerialNumber(id));
+        LaptopEntity laptopEntity = laptopsRepo.findFirstByTechnicsEntity(getTechnicEntityById(id));
 
         try {
             TechnicFields technicFields = TechnicFields.valueOf(field.toUpperCase());
@@ -62,14 +63,14 @@ public class LaptopService extends AnyTechService{
 
     @Override
     public boolean delete(Long id) {
-        LaptopEntity laptopEntity = laptopsRepo.findFirstByTechnicsEntity(technicsRepo.findFirstBySerialNumber(id));
+        LaptopEntity laptopEntity = laptopsRepo.findFirstByTechnicsEntity(getTechnicEntityById(id));
         laptopsRepo.delete(laptopEntity);
         technicsRepo.deleteFirstBySerialNumber(id);
         return false;
     }
     @Override
     public TechnicsResponse getById(Long id) {
-        LaptopEntity laptopEntity = laptopsRepo.findFirstByTechnicsEntity(technicsRepo.findFirstBySerialNumber(id));
+        LaptopEntity laptopEntity = laptopsRepo.findFirstByTechnicsEntity(getTechnicEntityById(id));
         return castToTLaptopResponse(laptopEntity);
     }
 
