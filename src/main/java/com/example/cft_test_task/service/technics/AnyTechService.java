@@ -1,8 +1,7 @@
 package com.example.cft_test_task.service.technics;
 
-import com.example.cft_test_task.model.entities.computers.TechnicsEntity;
+import com.example.cft_test_task.model.entities.TechnicsEntity;
 import com.example.cft_test_task.model.enums.tech.TechnicFields;
-import com.example.cft_test_task.model.enums.tech.TechnicTypes;
 import com.example.cft_test_task.model.rest.request.TechnicsRequest;
 import com.example.cft_test_task.model.rest.response.TechnicsResponse;
 import com.example.cft_test_task.repos.TechnicsRepo;

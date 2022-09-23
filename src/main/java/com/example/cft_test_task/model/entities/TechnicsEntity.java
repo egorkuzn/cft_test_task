@@ -1,4 +1,4 @@
-package com.example.cft_test_task.model.entities.computers;
+package com.example.cft_test_task.model.entities;
 
 import com.example.cft_test_task.model.enums.tech.TechnicTypes;
 

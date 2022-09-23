@@ -1,7 +1,7 @@
 package com.example.cft_test_task.service.technics.implementations;
 
-import com.example.cft_test_task.model.entities.computers.TechnicsEntity;
-import com.example.cft_test_task.model.entities.computers.technics.LaptopEntity;
+import com.example.cft_test_task.model.entities.TechnicsEntity;
+import com.example.cft_test_task.model.entities.technics.LaptopEntity;
 import com.example.cft_test_task.model.enums.tech.TechnicFields;
 import com.example.cft_test_task.model.enums.tech.details.laptop.LaptopDiagonal;
 import com.example.cft_test_task.model.rest.request.TechnicsRequest;
