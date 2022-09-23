@@ -9,3 +9,5 @@
 //public interface TechTypeRepo <TypeEntity> extends JpaRepository<TypeEntity, Long> {
 //    TypeEntity findFirstByTechnicsEntity(TechnicsEntity technicsEntity);
 //}
+
+
