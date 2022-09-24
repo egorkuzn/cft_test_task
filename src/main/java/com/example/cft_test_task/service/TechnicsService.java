@@ -37,10 +37,10 @@ public class TechnicsService {
     }
     public boolean add(TechnicsRequest technicsRequest) {
         switch (TechnicTypes.valueOf(technicsRequest.type.toUpperCase())){
-            case DESKTOP: return desktopService.add(technicsRequest);
-            case DISPLAY: return displayService.add(technicsRequest);
-            case LAPTOP: return laptopService.add(technicsRequest);
-            case STORAGE: return storageService.add(technicsRequest);
+            case DESKTOP: return desktopService.add(technicsRequest, new DesktopEntity());
+            case DISPLAY: return displayService.add(technicsRequest, new DisplayEntity());
+            case LAPTOP: return laptopService.add(technicsRequest, new LaptopEntity());
+            case STORAGE: return storageService.add(technicsRequest, new StorageEntity());
             default: return false;
         }
     }

@@ -9,6 +9,8 @@ import javax.persistence.*;
 @Table
 public class TechEntityBase{
     @Id
+    @GeneratedValue
+    public Long id;
     @OneToOne
     @JoinColumn
     public TechnicsEntity technicsEntity;

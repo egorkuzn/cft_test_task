@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 // Serial №| Producer | Price | Count of elem
 @Entity
 @Table(name = "Technics")
-public class TechnicsEntity {
+public class TechnicsEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)

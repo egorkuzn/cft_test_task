@@ -149,9 +149,9 @@ public abstract class AnyTechService {
         return technicsResponse;
     }
 
-    protected TechnicsResponse castToTypeResponse(TechEntityBase laptopEntity){
+    protected TechnicsResponse castToTypeResponse(TechEntityBase entityBase){
         TechnicsResponse technicsResponse = new TechnicsResponse();
-        castToTechnicsResponse(technicsResponse, laptopEntity.technicsEntity);
+        castToTechnicsResponse(technicsResponse, entityBase.technicsEntity);
 
         return technicsResponse;
     }
@@ -161,7 +161,6 @@ public abstract class AnyTechService {
         return technicsRepo.findFirstBySerialNumber(id);
     }
 
-    public abstract boolean add(TechnicsRequest technicsRequest);
     public abstract boolean edit(Long id, String field, String value);
     public abstract boolean delete(Long id);
     public abstract TechnicsResponse getById(Long id);

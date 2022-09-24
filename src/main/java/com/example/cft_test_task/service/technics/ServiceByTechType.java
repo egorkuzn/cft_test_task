@@ -10,9 +10,14 @@ import com.example.cft_test_task.repos.TechnicsRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 @Service
 public class ServiceByTechType<TypeEntity extends TechEntityBase> extends AnyTechService {
@@ -24,11 +29,8 @@ public class ServiceByTechType<TypeEntity extends TechEntityBase> extends AnyTec
         this.typeRepo = typeRepo;
     }
 
-    @Override
-    public boolean add(TechnicsRequest technicsRequest) {
+    public boolean add(TechnicsRequest technicsRequest, TypeEntity typeEntity) {
         try {
-            TypeEntity typeEntity = new_TypeEntity();
-
             if(typeEntity == null)
                 return false;
 
@@ -41,19 +43,6 @@ public class ServiceByTechType<TypeEntity extends TechEntityBase> extends AnyTec
             return true;
         } catch (IllegalArgumentException e) {
             return false;
-        }
-    }
-
-    private TypeEntity new_TypeEntity() {
-        ParameterizedType superClass = (ParameterizedType) getClass().getGenericSuperclass();
-        Class<TypeEntity> type = (Class<TypeEntity>) superClass.getActualTypeArguments()[0];
-
-        try {
-            return (TypeEntity) type.getDeclaredConstructor().newInstance();
-            //Do whatever with t
-        } catch (Exception e) {
-            // Oops, no default constructor
-            return null;
         }
     }
 

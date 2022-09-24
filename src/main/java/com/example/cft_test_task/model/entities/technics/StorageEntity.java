@@ -1,11 +1,9 @@
 package com.example.cft_test_task.model.entities.technics;
 
-import com.example.cft_test_task.model.entities.TechnicsEntity;
-
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
 
 @Entity
-@Table(name = "Storages")
 public class StorageEntity extends TechEntityBase{
     @Column
     public int volume;
