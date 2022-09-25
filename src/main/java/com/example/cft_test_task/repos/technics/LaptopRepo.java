@@ -1,4 +1,4 @@
-package com.example.cft_test_task.repos;
+package com.example.cft_test_task.repos.technics;
 
 import com.example.cft_test_task.model.entities.TechnicsEntity;
 import com.example.cft_test_task.model.entities.technics.DesktopEntity;

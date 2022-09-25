@@ -3,10 +3,13 @@ package com.example.cft_test_task.repos;
 import com.example.cft_test_task.model.entities.TechnicsEntity;
 import com.example.cft_test_task.model.entities.technics.*;
 import com.example.cft_test_task.model.enums.tech.TechnicTypes;
+import com.example.cft_test_task.repos.technics.DesktopRepo;
+import com.example.cft_test_task.repos.technics.DisplayRepo;
+import com.example.cft_test_task.repos.technics.LaptopRepo;
+import com.example.cft_test_task.repos.technics.StorageRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
