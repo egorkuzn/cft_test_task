@@ -1,4 +1,4 @@
-package com.example.cft_test_task.model.entities.computers;
+package com.example.cft_test_task.model.entities;
 
 import com.example.cft_test_task.model.enums.tech.TechnicTypes;
 
@@ -8,10 +8,10 @@ import java.math.BigDecimal;
 // Serial №| Producer | Price | Count of elem
 @Entity
 @Table(name = "Technics")
-public class TechnicsEntity {
+public class TechnicsEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
+    @Column(nullable = false)
     public Long serialNumber;
 
     @Column
@@ -22,4 +22,8 @@ public class TechnicsEntity {
 
     @Column
     public Integer countOfElems;
+
+    @Enumerated
+    @Column
+    public TechnicTypes technicType;
 }
