@@ -36,41 +36,58 @@ public class TechnicsService {
         this.technicsRepo = technicsRepo;
     }
     public boolean add(TechnicsRequest technicsRequest) {
-        switch (TechnicTypes.valueOf(technicsRequest.type.toUpperCase())){
-            case DESKTOP: return desktopService.add(technicsRequest, new DesktopEntity());
-            case DISPLAY: return displayService.add(technicsRequest, new DisplayEntity());
-            case LAPTOP: return laptopService.add(technicsRequest, new LaptopEntity());
-            case STORAGE: return storageService.add(technicsRequest, new StorageEntity());
-            default: return false;
+        try {
+            switch (TechnicTypes.valueOf(technicsRequest.type.toUpperCase())){
+                case DESKTOP: return desktopService.add(technicsRequest, new DesktopEntity());
+                case DISPLAY: return displayService.add(technicsRequest, new DisplayEntity());
+                case LAPTOP: return laptopService.add(technicsRequest, new LaptopEntity());
+                case STORAGE: return storageService.add(technicsRequest, new StorageEntity());
+                default: return false;
+            }
+        } catch (IllegalArgumentException e){
+            return false;
         }
     }
 
     public boolean edit(Long id, String field, String variable) {
-        TechnicTypes type = technicsRepo.findTypeBySerialNumber(id);
+        try {
+            TechnicTypes type = technicsRepo.findFirstBySerialNumber(id).technicType;
 
-        switch (type){
-            case DESKTOP: return desktopService.edit(id, field, variable);
-            case DISPLAY: return displayService.edit(id, field, variable);
-            case LAPTOP: return laptopService.edit(id, field, variable);
-            case STORAGE: return storageService.edit(id, field, variable);
-            default: return false;
+            switch (type) {
+                case DESKTOP:
+                    return desktopService.edit(id, field, variable);
+                case DISPLAY:
+                    return displayService.edit(id, field, variable);
+                case LAPTOP:
+                    return laptopService.edit(id, field, variable);
+                case STORAGE:
+                    return storageService.edit(id, field, variable);
+                default:
+                    return false;
+            }
+        } catch(NullPointerException e){
+            return false;
         }
     }
 
     public boolean delete(Long id) {
-        TechnicTypes type = technicsRepo.findTypeBySerialNumber(id);
+        try{
+            TechnicTypes type = technicsRepo.findFirstBySerialNumber(id).technicType;
 
-        switch (type){
-            case DESKTOP: return desktopService.delete(id);
-            case DISPLAY: return displayService.delete(id);
-            case LAPTOP: return laptopService.delete(id);
-            case STORAGE: return storageService.delete(id);
-            default: return false;
+            switch (type){
+                case DESKTOP: return desktopService.delete(id);
+                case DISPLAY: return displayService.delete(id);
+                case LAPTOP: return laptopService.delete(id);
+                case STORAGE: return storageService.delete(id);
+                default: return false;
+            }
+        } catch (NullPointerException e){
+            return false;
         }
     }
 
     public TechnicsResponse getById(Long id) {
-        TechnicTypes type = technicsRepo.findTypeBySerialNumber(id);
+        TechnicTypes type = technicsRepo.findFirstBySerialNumber(id).technicType;
 
         switch (type){
             case DESKTOP: return desktopService.getById(id);
@@ -82,12 +99,16 @@ public class TechnicsService {
     }
 
     public List<TechnicsResponse> getByType(String type) {
-        switch (TechnicTypes.valueOf(type.toUpperCase())){
-            case DESKTOP: return desktopService.getAll(TechnicTypes.DESKTOP);
-            case DISPLAY: return displayService.getAll(TechnicTypes.DISPLAY);
-            case LAPTOP: return laptopService.getAll(TechnicTypes.LAPTOP);
-            case STORAGE: return storageService.getAll(TechnicTypes.STORAGE);
-            default: return null;
+        try {
+            switch (TechnicTypes.valueOf(type.toUpperCase())){
+                case DESKTOP: return desktopService.getAll(TechnicTypes.DESKTOP);
+                case DISPLAY: return displayService.getAll(TechnicTypes.DISPLAY);
+                case LAPTOP: return laptopService.getAll(TechnicTypes.LAPTOP);
+                case STORAGE: return storageService.getAll(TechnicTypes.STORAGE);
+                default: return null;
+            }
+        } catch (IllegalArgumentException e){
+            return null;
         }
     }
 }

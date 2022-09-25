@@ -39,6 +39,8 @@ public class ServiceByTechType<TypeEntity extends TechEntityBase> extends AnyTec
             initTechEntity(technicsEntity, technicsRequest);
             typeEntity.setTechnicsEntity(technicsEntity);
             setSpecificParam(typeEntity, technicsRequest.specificParam);
+            technicsRepo.save(technicsEntity);
+            technicsRepo.flush();
             typeRepo.save(typeEntity);
             return true;
         } catch (IllegalArgumentException e) {
@@ -70,7 +72,8 @@ public class ServiceByTechType<TypeEntity extends TechEntityBase> extends AnyTec
         try {
             TypeEntity typeEntity = typeRepo.findFirstByTechnicsEntity(getTechnicEntityById(id));
             typeRepo.delete(typeEntity);
-            technicsRepo.deleteFirstBySerialNumber(id);
+            technicsRepo.deleteById(id);
+
             return true;
         } catch (NullPointerException e){
             return false;

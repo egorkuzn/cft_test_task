@@ -23,8 +23,6 @@ public abstract class AnyTechService {
         technicsEntity.countOfElems = technicsRequest.countOfElements;
         technicsEntity.price = technicsRequest.price;
         technicsEntity.producer = technicsRequest.producer;
-        technicsRepo.save(technicsEntity);
-        technicsRepo.flush();
     }
 
     protected static boolean editTechEntity(TechnicsEntity technicsEntity, TechnicFields field, String value) throws IllegalArgumentException{

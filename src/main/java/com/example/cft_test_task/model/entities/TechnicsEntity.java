@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 public class TechnicsEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
+    @Column(nullable = false)
     public Long serialNumber;
 
     @Column
@@ -23,7 +23,7 @@ public class TechnicsEntity{
     @Column
     public Integer countOfElems;
 
-    @Column
     @Enumerated
+    @Column
     public TechnicTypes technicType;
 }
