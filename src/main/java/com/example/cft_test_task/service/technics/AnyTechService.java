@@ -8,6 +8,7 @@ import com.example.cft_test_task.model.enums.tech.details.desktop.PCFormFactor;
 import com.example.cft_test_task.model.enums.tech.details.laptop.LaptopDiagonal;
 import com.example.cft_test_task.model.rest.request.TechnicsRequest;
 import com.example.cft_test_task.model.rest.response.TechnicsResponse;
+import com.example.cft_test_task.repos.TechTypeRepo;
 import com.example.cft_test_task.repos.TechnicsRepo;
 
 import java.math.BigDecimal;
@@ -25,7 +26,7 @@ public abstract class AnyTechService {
         technicsEntity.producer = technicsRequest.producer;
     }
 
-    protected static boolean editTechEntity(TechnicsEntity technicsEntity, TechnicFields field, String value) throws IllegalArgumentException{
+    protected boolean editTechEntity(TechnicsEntity technicsEntity, TechnicFields field, String value) throws IllegalArgumentException{
         switch (field){
             case PRODUCER -> technicsEntity.producer = value;
             case PRICE -> technicsEntity.price = new BigDecimal(value);
@@ -33,6 +34,7 @@ public abstract class AnyTechService {
             default -> {return false;}
         }
 
+        technicsRepo.save(technicsEntity);
         return true;
     }
 
@@ -93,36 +95,41 @@ public abstract class AnyTechService {
             setSpecificParam((LaptopEntity) techEntityBase, specificParam);
     }
 
-    protected static boolean editFormFactor(TechEntityBase desktopEntity, String value) throws IllegalArgumentException{
+    protected static boolean editFormFactor(TechEntityBase desktopEntity, String value, TechTypeRepo<DesktopEntity> typeRepo) throws IllegalArgumentException{
         if(desktopEntity instanceof DesktopEntity) {
             ((DesktopEntity)desktopEntity).setFormFactor(PCFormFactor.valueOf(value));
+            typeRepo.save((DesktopEntity) desktopEntity);
             return true;
         }
 
         return false;
     }
 
-    protected static boolean editLaptopDiagonal(TechEntityBase laptopEntity, String value){
+    protected static boolean editLaptopDiagonal(TechEntityBase laptopEntity, String value, TechTypeRepo<LaptopEntity> typeRepo){
         if(laptopEntity instanceof LaptopEntity){
             ((LaptopEntity)laptopEntity).setDiagonal(LaptopDiagonal.valueOf(value));
+            typeRepo.save((LaptopEntity) laptopEntity);
             return true;
         }
 
         return false;
     }
 
-    protected static boolean editDisplayDiagonal(TechEntityBase displayEntity, String value){
+    protected static boolean editDisplayDiagonal(TechEntityBase displayEntity, String value, TechTypeRepo<DisplayEntity> typeRepo){
         if(displayEntity instanceof DisplayEntity){
             ((DisplayEntity)displayEntity).setDiagonal(Float.parseFloat(value));
+            typeRepo.save((DisplayEntity)displayEntity);
             return true;
         }
 
         return false;
     }
 
-    protected static boolean editVolume(TechEntityBase storageEntity, String value){
+    protected static boolean editVolume(TechEntityBase storageEntity, String value, TechTypeRepo<StorageEntity> typeRepo){
         if(storageEntity instanceof StorageEntity){
             ((StorageEntity)storageEntity).setVolume(Integer.parseInt(value));
+            typeRepo.save((StorageEntity)storageEntity);
+            return true;
         }
 
         return false;

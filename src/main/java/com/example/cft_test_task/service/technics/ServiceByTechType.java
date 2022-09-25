@@ -56,10 +56,10 @@ public class ServiceByTechType<TypeEntity extends TechEntityBase> extends AnyTec
             TechnicFields technicField = TechnicFields.valueOf(field.toUpperCase());
 
             return switch (technicField) {
-                case FORM_FACTOR -> editFormFactor(typeEntity, value);
-                case LAPTOP_DIAGONAL -> editLaptopDiagonal(typeEntity, value);
-                case DISPLAY_DIAGONAL -> editDisplayDiagonal(typeEntity, value);
-                case VOLUME -> editVolume(typeEntity, value);
+                case FORM_FACTOR -> editFormFactor(typeEntity, value, (TechTypeRepo<DesktopEntity>) typeRepo);
+                case LAPTOP_DIAGONAL -> editLaptopDiagonal(typeEntity, value, (TechTypeRepo<LaptopEntity>) typeRepo);
+                case DISPLAY_DIAGONAL -> editDisplayDiagonal(typeEntity, value, (TechTypeRepo<DisplayEntity>) typeRepo);
+                case VOLUME -> editVolume(typeEntity, value, (TechTypeRepo<StorageEntity>) typeRepo);
                 default -> editTechEntity(typeEntity.getTechnicsEntity(), technicField, value);
             };
         } catch (IllegalArgumentException | NullPointerException e){
