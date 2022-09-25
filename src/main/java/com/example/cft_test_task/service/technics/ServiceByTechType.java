@@ -23,7 +23,6 @@ import java.util.Properties;
 @Service
 public class ServiceByTechType<TypeEntity extends TechEntityBase> extends AnyTechService {
     final TechTypeRepo<TypeEntity> typeRepo;
-    TechnicTypes technicType;
 
     @Autowired
     public ServiceByTechType(TechTypeRepo<TypeEntity> typeRepo, TechnicsRepo technicsRepo){
@@ -39,7 +38,7 @@ public class ServiceByTechType<TypeEntity extends TechEntityBase> extends AnyTec
             TechnicsEntity technicsEntity = new TechnicsEntity();
             initTechEntity(technicsEntity, technicsRequest);
             typeEntity.setTechnicsEntity(technicsEntity);
-            setSpecificParam(typeEntity, technicsRequest.specificParam, technicType);
+            setSpecificParam(typeEntity, technicsRequest.specificParam);
             typeRepo.save(typeEntity);
             return true;
         } catch (IllegalArgumentException e) {
@@ -89,7 +88,7 @@ public class ServiceByTechType<TypeEntity extends TechEntityBase> extends AnyTec
     }
 
     @Override
-    public List<TechnicsResponse> getAll() {
+    public List<TechnicsResponse> getAll(TechnicTypes technicType) {
         try {
             List<TechnicsResponse> technicsResponseList = new ArrayList<>();
             List<TypeEntity> desktopEntityList = typeRepo.findAll(technicType);

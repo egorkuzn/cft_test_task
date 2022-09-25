@@ -45,47 +45,55 @@ public abstract class AnyTechService {
         technicsResponse.serialNumber = technicsEntity.serialNumber;
     }
 
-    protected static void setSpecificParam(DesktopEntity desktopEntity, String specificParam, TechnicTypes technicType) {
+    protected static void setSpecificParam(DesktopEntity desktopEntity, String specificParam) {
         desktopEntity.setFormFactor(PCFormFactor.valueOf(specificParam.toUpperCase()));
 
         TechnicsEntity technicsEntity = desktopEntity.getTechnicsEntity();
         technicsEntity.technicType = TechnicTypes.DESKTOP;
-        technicType = TechnicTypes.DESKTOP;
 
         desktopEntity.setTechnicsEntity(technicsEntity);
     }
 
-    protected static void setSpecificParam(DisplayEntity displayEntity, String specificParam, TechnicTypes technicType) {
+    protected static void setSpecificParam(DisplayEntity displayEntity, String specificParam) {
         displayEntity.setDiagonal(Float.parseFloat(specificParam));
 
         TechnicsEntity technicsEntity = displayEntity.getTechnicsEntity();
         technicsEntity.technicType = TechnicTypes.DISPLAY;
-        technicType = TechnicTypes.DISPLAY;
 
         displayEntity.setTechnicsEntity(technicsEntity);
     }
 
-    protected static void setSpecificParam(StorageEntity storageEntity, String specificParam, TechnicTypes technicType) {
+    protected static void setSpecificParam(StorageEntity storageEntity, String specificParam) {
         storageEntity.setVolume(Integer.parseInt(specificParam));
 
         TechnicsEntity technicsEntity = storageEntity.getTechnicsEntity();
         technicsEntity.technicType = TechnicTypes.STORAGE;
-        technicType = TechnicTypes.STORAGE;
 
         storageEntity.setTechnicsEntity(technicsEntity);
     }
 
-    protected static void setSpecificParam(LaptopEntity laptopEntity, String specificParam, TechnicTypes technicType) {
-        laptopEntity.setDiagonal(LaptopDiagonal.valueOf(specificParam));
+    protected static void setSpecificParam(LaptopEntity techEntityBase, String specificParam) {
+        techEntityBase.setDiagonal(LaptopDiagonal.valueOf(specificParam));
 
-        TechnicsEntity technicsEntity = laptopEntity.getTechnicsEntity();
+        TechnicsEntity technicsEntity = techEntityBase.getTechnicsEntity();
         technicsEntity.technicType = TechnicTypes.LAPTOP;
-        technicType = TechnicTypes.LAPTOP;
 
-        laptopEntity.setTechnicsEntity(technicsEntity);
+        techEntityBase.setTechnicsEntity(technicsEntity);
     }
 
-    protected static void setSpecificParam(TechEntityBase laptopEntity, String specificParam, TechnicTypes technicType) {}
+    //TODO:
+    //Я вообще не понимаю: почему все улетает блин в этот метод!!!
+    //Почему не перегружаются функции setSpecificParam()???
+    protected static void setSpecificParam(TechEntityBase techEntityBase, String specificParam) {
+        if(techEntityBase instanceof DesktopEntity)
+            setSpecificParam((DesktopEntity) techEntityBase, specificParam);
+        else if(techEntityBase instanceof DisplayEntity)
+            setSpecificParam((DisplayEntity) techEntityBase, specificParam);
+        else if (techEntityBase instanceof StorageEntity)
+            setSpecificParam((StorageEntity) techEntityBase, specificParam);
+        else if (techEntityBase instanceof LaptopEntity)
+            setSpecificParam((LaptopEntity) techEntityBase, specificParam);
+    }
 
     protected static boolean editFormFactor(TechEntityBase desktopEntity, String value) throws IllegalArgumentException{
         if(desktopEntity instanceof DesktopEntity) {
@@ -172,10 +180,19 @@ public abstract class AnyTechService {
     }
 
     protected static TechnicsResponse castToTypeResponse(TechEntityBase entityBase){
-        TechnicsResponse technicsResponse = new TechnicsResponse();
-        castToTechnicsResponse(technicsResponse, entityBase.getTechnicsEntity());
-
-        return technicsResponse;
+        if(entityBase instanceof DesktopEntity)
+            return castToTypeResponse((DesktopEntity) entityBase);
+        else if(entityBase instanceof DisplayEntity)
+            return castToTypeResponse((DisplayEntity) entityBase);
+        else if (entityBase instanceof StorageEntity)
+            return castToTypeResponse((StorageEntity) entityBase);
+        else if (entityBase instanceof LaptopEntity)
+            return castToTypeResponse((LaptopEntity) entityBase);
+        else {
+            TechnicsResponse technicsResponse = new TechnicsResponse();
+            castToTechnicsResponse(technicsResponse, entityBase.getTechnicsEntity());
+            return technicsResponse;
+        }
     }
 
 
@@ -186,5 +203,5 @@ public abstract class AnyTechService {
     public abstract boolean edit(Long id, String field, String value);
     public abstract boolean delete(Long id);
     public abstract TechnicsResponse getById(Long id);
-    public abstract List<TechnicsResponse> getAll();
+    public abstract List<TechnicsResponse> getAll(TechnicTypes technicType);
 }

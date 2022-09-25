@@ -83,10 +83,10 @@ public class TechnicsService {
 
     public List<TechnicsResponse> getByType(String type) {
         switch (TechnicTypes.valueOf(type.toUpperCase())){
-            case DESKTOP: return desktopService.getAll();
-            case DISPLAY: return displayService.getAll();
-            case LAPTOP: return laptopService.getAll();
-            case STORAGE: return storageService.getAll();
+            case DESKTOP: return desktopService.getAll(TechnicTypes.DESKTOP);
+            case DISPLAY: return displayService.getAll(TechnicTypes.DISPLAY);
+            case LAPTOP: return laptopService.getAll(TechnicTypes.LAPTOP);
+            case STORAGE: return storageService.getAll(TechnicTypes.STORAGE);
             default: return null;
         }
     }
