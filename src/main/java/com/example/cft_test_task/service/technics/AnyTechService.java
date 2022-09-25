@@ -27,7 +27,7 @@ public abstract class AnyTechService {
         technicsRepo.flush();
     }
 
-    protected boolean editTechEntity(TechnicsEntity technicsEntity, TechnicFields field, String value) throws IllegalArgumentException{
+    protected static boolean editTechEntity(TechnicsEntity technicsEntity, TechnicFields field, String value) throws IllegalArgumentException{
         switch (field){
             case PRODUCER -> technicsEntity.producer = value;
             case PRICE -> technicsEntity.price = new BigDecimal(value);
@@ -38,34 +38,40 @@ public abstract class AnyTechService {
         return true;
     }
 
-    protected void castToTechnicsResponse(TechnicsResponse technicsResponse, TechnicsEntity technicsEntity){
+    protected static void castToTechnicsResponse(TechnicsResponse technicsResponse, TechnicsEntity technicsEntity){
         technicsResponse.countOfElements = technicsEntity.countOfElems;
         technicsResponse.price = technicsEntity.price;
         technicsResponse.producer = technicsEntity.producer;
         technicsResponse.serialNumber = technicsEntity.serialNumber;
     }
 
-    protected static void setSpecificParam(DesktopEntity desktopEntity, String formFactor) throws IllegalArgumentException{
-        desktopEntity.formFactor = PCFormFactor.valueOf(formFactor.toUpperCase());
+    protected static void setSpecificParam(DesktopEntity desktopEntity, String specificParam, TechnicTypes technicType) {
+        desktopEntity.formFactor = PCFormFactor.valueOf(specificParam.toUpperCase());
+        technicType = TechnicTypes.DESKTOP;
+        desktopEntity.technicsEntity.technicType = TechnicTypes.DESKTOP;
     }
 
-    protected static void setSpecificParam(DisplayEntity displayEntity, String diagonal) throws IllegalArgumentException{
-        displayEntity.diagonal = Float.parseFloat(diagonal);
+    protected static void setSpecificParam(DisplayEntity displayEntity, String specificParam, TechnicTypes technicType) {
+        displayEntity.diagonal = Float.parseFloat(specificParam);
+        technicType = TechnicTypes.DISPLAY;
+        displayEntity.technicsEntity.technicType = TechnicTypes.DISPLAY;
     }
 
-    protected static void setSpecificParam(StorageEntity storageEntity, String volume) throws IllegalArgumentException{
-        storageEntity.volume = Integer.parseInt(volume);
+    protected static void setSpecificParam(StorageEntity storageEntity, String specificParam, TechnicTypes technicType) {
+        storageEntity.volume = Integer.parseInt(specificParam);
+        technicType = TechnicTypes.STORAGE;
+        storageEntity.technicsEntity.technicType = TechnicTypes.STORAGE;
     }
 
-    protected static void setSpecificParam(LaptopEntity laptopEntity, String diagonal) throws IllegalArgumentException{
-        laptopEntity.diagonal = LaptopDiagonal.valueOf(diagonal);
+    protected static void setSpecificParam(LaptopEntity laptopEntity, String specificParam, TechnicTypes technicType) {
+        laptopEntity.diagonal = LaptopDiagonal.valueOf(specificParam);
+        technicType = TechnicTypes.LAPTOP;
+        laptopEntity.technicsEntity.technicType = TechnicTypes.LAPTOP;
     }
 
-    protected static void setSpecificParam(TechEntityBase techEntityBase, String something){
+    protected static void setSpecificParam(TechEntityBase laptopEntity, String specificParam, TechnicTypes technicType) {}
 
-    }
-
-    protected boolean editFormFactor(TechEntityBase desktopEntity, String value) throws IllegalArgumentException{
+    protected static boolean editFormFactor(TechEntityBase desktopEntity, String value) throws IllegalArgumentException{
         if(desktopEntity instanceof DesktopEntity) {
             ((DesktopEntity)desktopEntity).formFactor = PCFormFactor.valueOf(value);
             return true;
@@ -74,7 +80,7 @@ public abstract class AnyTechService {
         return false;
     }
 
-    protected boolean editLaptopDiagonal(TechEntityBase laptopEntity, String value){
+    protected static boolean editLaptopDiagonal(TechEntityBase laptopEntity, String value){
         if(laptopEntity instanceof LaptopEntity){
             ((LaptopEntity)laptopEntity).diagonal = LaptopDiagonal.valueOf(value);
             return true;
@@ -83,7 +89,7 @@ public abstract class AnyTechService {
         return false;
     }
 
-    protected boolean editDisplayDiagonal(TechEntityBase displayEntity, String value){
+    protected static boolean editDisplayDiagonal(TechEntityBase displayEntity, String value){
         if(displayEntity instanceof DisplayEntity){
             ((DisplayEntity)displayEntity).diagonal = Float.parseFloat(value);
             return true;
@@ -92,7 +98,7 @@ public abstract class AnyTechService {
         return false;
     }
 
-    protected boolean editVolume(TechEntityBase storageEntity, String value){
+    protected static boolean editVolume(TechEntityBase storageEntity, String value){
         if(storageEntity instanceof StorageEntity){
             ((StorageEntity)storageEntity).volume = Integer.parseInt(value);
         }
@@ -100,7 +106,7 @@ public abstract class AnyTechService {
         return false;
     }
 
-    protected TechnicsResponse castToTypeResponse(DesktopEntity desktopEntity){
+    protected static TechnicsResponse castToTypeResponse(DesktopEntity desktopEntity){
         TechnicsResponse technicsResponse = new TechnicsResponse();
 
         technicsResponse.specificFieldType = "form_factor";
@@ -113,7 +119,7 @@ public abstract class AnyTechService {
 
     }
 
-    protected TechnicsResponse castToTypeResponse(DisplayEntity displayEntity){
+    protected static TechnicsResponse castToTypeResponse(DisplayEntity displayEntity){
         TechnicsResponse technicsResponse = new TechnicsResponse();
 
         technicsResponse.specificFieldType = "diagonal";
@@ -125,7 +131,7 @@ public abstract class AnyTechService {
         return technicsResponse;
     }
 
-    protected TechnicsResponse castToTypeResponse(StorageEntity storageEntity){
+    protected static TechnicsResponse castToTypeResponse(StorageEntity storageEntity){
         TechnicsResponse technicsResponse = new TechnicsResponse();
 
         technicsResponse.specificFieldType = "volume";
@@ -137,7 +143,7 @@ public abstract class AnyTechService {
         return technicsResponse;
     }
 
-    protected TechnicsResponse castToTypeResponse(LaptopEntity laptopEntity){
+    protected static TechnicsResponse castToTypeResponse(LaptopEntity laptopEntity){
         TechnicsResponse technicsResponse = new TechnicsResponse();
 
         technicsResponse.specificFieldType = "laptop_diagonal";
@@ -149,7 +155,7 @@ public abstract class AnyTechService {
         return technicsResponse;
     }
 
-    protected TechnicsResponse castToTypeResponse(TechEntityBase entityBase){
+    protected static TechnicsResponse castToTypeResponse(TechEntityBase entityBase){
         TechnicsResponse technicsResponse = new TechnicsResponse();
         castToTechnicsResponse(technicsResponse, entityBase.technicsEntity);
 

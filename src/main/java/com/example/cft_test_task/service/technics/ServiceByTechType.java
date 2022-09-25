@@ -3,6 +3,7 @@ package com.example.cft_test_task.service.technics;
 import com.example.cft_test_task.model.entities.TechnicsEntity;
 import com.example.cft_test_task.model.entities.technics.*;
 import com.example.cft_test_task.model.enums.tech.TechnicFields;
+import com.example.cft_test_task.model.enums.tech.TechnicTypes;
 import com.example.cft_test_task.model.rest.request.TechnicsRequest;
 import com.example.cft_test_task.model.rest.response.TechnicsResponse;
 import com.example.cft_test_task.repos.TechTypeRepo;
@@ -22,6 +23,7 @@ import java.util.Properties;
 @Service
 public class ServiceByTechType<TypeEntity extends TechEntityBase> extends AnyTechService {
     final TechTypeRepo<TypeEntity> typeRepo;
+    TechnicTypes technicType;
 
     @Autowired
     public ServiceByTechType(TechTypeRepo<TypeEntity> typeRepo, TechnicsRepo technicsRepo){
@@ -37,9 +39,8 @@ public class ServiceByTechType<TypeEntity extends TechEntityBase> extends AnyTec
             TechnicsEntity technicsEntity = new TechnicsEntity();
             initTechEntity(technicsEntity, technicsRequest);
             typeEntity.technicsEntity = technicsEntity;
-            setSpecificParam(typeEntity, technicsRequest.specificParam);
+            setSpecificParam(typeEntity, technicsRequest.specificParam, technicType);
             typeRepo.save(typeEntity);
-            typeRepo.flush();
             return true;
         } catch (IllegalArgumentException e) {
             return false;
@@ -60,31 +61,43 @@ public class ServiceByTechType<TypeEntity extends TechEntityBase> extends AnyTec
                 case VOLUME -> editVolume(typeEntity, value);
                 default -> editTechEntity(typeEntity.technicsEntity, technicField, value);
             };
-        } catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException | NullPointerException e){
             return false;
         }
     }
 
     @Override
     public boolean delete(Long id) {
-        TypeEntity typeEntity = typeRepo.findFirstByTechnicsEntity(getTechnicEntityById(id));
-        typeRepo.delete(typeEntity);
-        technicsRepo.deleteFirstBySerialNumber(id);
-        return true;
+        try {
+            TypeEntity typeEntity = typeRepo.findFirstByTechnicsEntity(getTechnicEntityById(id));
+            typeRepo.delete(typeEntity);
+            technicsRepo.deleteFirstBySerialNumber(id);
+            return true;
+        } catch (NullPointerException e){
+            return false;
+        }
     }
 
     @Override
     public TechnicsResponse getById(Long id) {
-        TypeEntity typeEntity = typeRepo.findFirstByTechnicsEntity(technicsRepo.findFirstBySerialNumber(id));
-        return castToTypeResponse(typeEntity);
+        try {
+            TypeEntity typeEntity = typeRepo.findFirstByTechnicsEntity(technicsRepo.findFirstBySerialNumber(id));
+            return castToTypeResponse(typeEntity);
+        } catch (NullPointerException e){
+            return null;
+        }
     }
 
     @Override
     public List<TechnicsResponse> getAll() {
-        List<TechnicsResponse> technicsResponseList = new ArrayList<>();
-        List<TypeEntity> desktopEntityList = typeRepo.findAll();
+        try {
+            List<TechnicsResponse> technicsResponseList = new ArrayList<>();
+            List<TypeEntity> desktopEntityList = typeRepo.findAll(technicType);
 
-        desktopEntityList.forEach(typeEntity -> technicsResponseList.add(castToTypeResponse(typeEntity)));
-        return technicsResponseList;
+            desktopEntityList.forEach(typeEntity -> technicsResponseList.add(castToTypeResponse(typeEntity)));
+            return technicsResponseList;
+        } catch (NullPointerException e){
+            return null;
+        }
     }
 }

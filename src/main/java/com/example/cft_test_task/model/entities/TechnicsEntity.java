@@ -22,4 +22,8 @@ public class TechnicsEntity{
 
     @Column
     public Integer countOfElems;
+
+    @Column
+    @Enumerated
+    public TechnicTypes technicType;
 }
