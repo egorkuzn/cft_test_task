@@ -6,7 +6,6 @@ import lombok.Data;
 import javax.persistence.*;
 
 @Entity
-@Table
 public class TechEntityBase{
     @Id
     @GeneratedValue

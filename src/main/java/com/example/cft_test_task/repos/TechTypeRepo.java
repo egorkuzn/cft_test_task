@@ -11,5 +11,4 @@ import java.util.List;
 @Repository
 public interface TechTypeRepo <TypeEntity extends TechEntityBase> extends JpaRepository<TypeEntity, Long> {
     TypeEntity findFirstByTechnicsEntity(TechnicsEntity technicsEntity);
-    List<TypeEntity> findAll();
 }
