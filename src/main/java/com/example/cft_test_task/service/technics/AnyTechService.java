@@ -50,6 +50,7 @@ public abstract class AnyTechService {
 
         TechnicsEntity technicsEntity = desktopEntity.getTechnicsEntity();
         technicsEntity.technicType = TechnicTypes.DESKTOP;
+        technicType = TechnicTypes.DESKTOP;
 
         desktopEntity.setTechnicsEntity(technicsEntity);
     }
@@ -59,6 +60,7 @@ public abstract class AnyTechService {
 
         TechnicsEntity technicsEntity = displayEntity.getTechnicsEntity();
         technicsEntity.technicType = TechnicTypes.DISPLAY;
+        technicType = TechnicTypes.DISPLAY;
 
         displayEntity.setTechnicsEntity(technicsEntity);
     }
@@ -68,6 +70,7 @@ public abstract class AnyTechService {
 
         TechnicsEntity technicsEntity = storageEntity.getTechnicsEntity();
         technicsEntity.technicType = TechnicTypes.STORAGE;
+        technicType = TechnicTypes.STORAGE;
 
         storageEntity.setTechnicsEntity(technicsEntity);
     }
@@ -77,6 +80,7 @@ public abstract class AnyTechService {
 
         TechnicsEntity technicsEntity = laptopEntity.getTechnicsEntity();
         technicsEntity.technicType = TechnicTypes.LAPTOP;
+        technicType = TechnicTypes.LAPTOP;
 
         laptopEntity.setTechnicsEntity(technicsEntity);
     }
