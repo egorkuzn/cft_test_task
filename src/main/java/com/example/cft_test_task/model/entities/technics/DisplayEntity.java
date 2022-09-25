@@ -1,12 +1,23 @@
 package com.example.cft_test_task.model.entities.technics;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import com.example.cft_test_task.model.entities.TechnicsEntity;
+import lombok.Data;
+
+import javax.persistence.*;
 
 @Entity
 @Table
-public class DisplayEntity extends TechEntityBase{
+@Data
+public class DisplayEntity implements TechEntityBase {
+    @Id
     @Column
-    public float diagonal;
+    @GeneratedValue
+    private Long id;
+
+    @JoinColumn
+    @OneToOne
+    private TechnicsEntity technicsEntity;
+
+    @Column
+    private float diagonal;
 }

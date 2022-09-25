@@ -40,7 +40,7 @@ public class TechTypeRepo<TypeEntity extends TechEntityBase>{
 
     public void save(TypeEntity typeEntity) {
         try {
-            switch (typeEntity.technicsEntity.technicType){
+            switch (typeEntity.getTechnicsEntity().technicType){
                 case DESKTOP -> desktopRepo.save((DesktopEntity) typeEntity);
                 case DISPLAY -> displayRepo.save((DisplayEntity) typeEntity);
                 case STORAGE -> storageRepo.save((StorageEntity) typeEntity);
@@ -53,7 +53,7 @@ public class TechTypeRepo<TypeEntity extends TechEntityBase>{
 
     public void delete(TypeEntity typeEntity) {
         try {
-            switch (typeEntity.technicsEntity.technicType){
+            switch (typeEntity.getTechnicsEntity().technicType){
                 case DESKTOP -> desktopRepo.delete((DesktopEntity) typeEntity);
                 case DISPLAY -> displayRepo.delete((DisplayEntity) typeEntity);
                 case STORAGE -> storageRepo.delete((StorageEntity) typeEntity);

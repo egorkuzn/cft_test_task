@@ -38,7 +38,7 @@ public class ServiceByTechType<TypeEntity extends TechEntityBase> extends AnyTec
 
             TechnicsEntity technicsEntity = new TechnicsEntity();
             initTechEntity(technicsEntity, technicsRequest);
-            typeEntity.technicsEntity = technicsEntity;
+            typeEntity.setTechnicsEntity(technicsEntity);
             setSpecificParam(typeEntity, technicsRequest.specificParam, technicType);
             typeRepo.save(typeEntity);
             return true;
@@ -59,7 +59,7 @@ public class ServiceByTechType<TypeEntity extends TechEntityBase> extends AnyTec
                 case LAPTOP_DIAGONAL -> editLaptopDiagonal(typeEntity, value);
                 case DISPLAY_DIAGONAL -> editDisplayDiagonal(typeEntity, value);
                 case VOLUME -> editVolume(typeEntity, value);
-                default -> editTechEntity(typeEntity.technicsEntity, technicField, value);
+                default -> editTechEntity(typeEntity.getTechnicsEntity(), technicField, value);
             };
         } catch (IllegalArgumentException | NullPointerException e){
             return false;

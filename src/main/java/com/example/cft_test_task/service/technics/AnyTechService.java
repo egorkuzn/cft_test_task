@@ -46,34 +46,46 @@ public abstract class AnyTechService {
     }
 
     protected static void setSpecificParam(DesktopEntity desktopEntity, String specificParam, TechnicTypes technicType) {
-        desktopEntity.formFactor = PCFormFactor.valueOf(specificParam.toUpperCase());
-        technicType = TechnicTypes.DESKTOP;
-        desktopEntity.technicsEntity.technicType = TechnicTypes.DESKTOP;
+        desktopEntity.setFormFactor(PCFormFactor.valueOf(specificParam.toUpperCase()));
+
+        TechnicsEntity technicsEntity = desktopEntity.getTechnicsEntity();
+        technicsEntity.technicType = TechnicTypes.DESKTOP;
+
+        desktopEntity.setTechnicsEntity(technicsEntity);
     }
 
     protected static void setSpecificParam(DisplayEntity displayEntity, String specificParam, TechnicTypes technicType) {
-        displayEntity.diagonal = Float.parseFloat(specificParam);
-        technicType = TechnicTypes.DISPLAY;
-        displayEntity.technicsEntity.technicType = TechnicTypes.DISPLAY;
+        displayEntity.setDiagonal(Float.parseFloat(specificParam));
+
+        TechnicsEntity technicsEntity = displayEntity.getTechnicsEntity();
+        technicsEntity.technicType = TechnicTypes.DISPLAY;
+
+        displayEntity.setTechnicsEntity(technicsEntity);
     }
 
     protected static void setSpecificParam(StorageEntity storageEntity, String specificParam, TechnicTypes technicType) {
-        storageEntity.volume = Integer.parseInt(specificParam);
-        technicType = TechnicTypes.STORAGE;
-        storageEntity.technicsEntity.technicType = TechnicTypes.STORAGE;
+        storageEntity.setVolume(Integer.parseInt(specificParam));
+
+        TechnicsEntity technicsEntity = storageEntity.getTechnicsEntity();
+        technicsEntity.technicType = TechnicTypes.STORAGE;
+
+        storageEntity.setTechnicsEntity(technicsEntity);
     }
 
     protected static void setSpecificParam(LaptopEntity laptopEntity, String specificParam, TechnicTypes technicType) {
-        laptopEntity.diagonal = LaptopDiagonal.valueOf(specificParam);
-        technicType = TechnicTypes.LAPTOP;
-        laptopEntity.technicsEntity.technicType = TechnicTypes.LAPTOP;
+        laptopEntity.setDiagonal(LaptopDiagonal.valueOf(specificParam));
+
+        TechnicsEntity technicsEntity = laptopEntity.getTechnicsEntity();
+        technicsEntity.technicType = TechnicTypes.LAPTOP;
+
+        laptopEntity.setTechnicsEntity(technicsEntity);
     }
 
     protected static void setSpecificParam(TechEntityBase laptopEntity, String specificParam, TechnicTypes technicType) {}
 
     protected static boolean editFormFactor(TechEntityBase desktopEntity, String value) throws IllegalArgumentException{
         if(desktopEntity instanceof DesktopEntity) {
-            ((DesktopEntity)desktopEntity).formFactor = PCFormFactor.valueOf(value);
+            ((DesktopEntity)desktopEntity).setFormFactor(PCFormFactor.valueOf(value));
             return true;
         }
 
@@ -82,7 +94,7 @@ public abstract class AnyTechService {
 
     protected static boolean editLaptopDiagonal(TechEntityBase laptopEntity, String value){
         if(laptopEntity instanceof LaptopEntity){
-            ((LaptopEntity)laptopEntity).diagonal = LaptopDiagonal.valueOf(value);
+            ((LaptopEntity)laptopEntity).setDiagonal(LaptopDiagonal.valueOf(value));
             return true;
         }
 
@@ -91,7 +103,7 @@ public abstract class AnyTechService {
 
     protected static boolean editDisplayDiagonal(TechEntityBase displayEntity, String value){
         if(displayEntity instanceof DisplayEntity){
-            ((DisplayEntity)displayEntity).diagonal = Float.parseFloat(value);
+            ((DisplayEntity)displayEntity).setDiagonal(Float.parseFloat(value));
             return true;
         }
 
@@ -100,7 +112,7 @@ public abstract class AnyTechService {
 
     protected static boolean editVolume(TechEntityBase storageEntity, String value){
         if(storageEntity instanceof StorageEntity){
-            ((StorageEntity)storageEntity).volume = Integer.parseInt(value);
+            ((StorageEntity)storageEntity).setVolume(Integer.parseInt(value));
         }
 
         return false;
@@ -110,10 +122,10 @@ public abstract class AnyTechService {
         TechnicsResponse technicsResponse = new TechnicsResponse();
 
         technicsResponse.specificFieldType = "form_factor";
-        technicsResponse.specificFieldValue = desktopEntity.formFactor.name().toLowerCase();
+        technicsResponse.specificFieldValue = desktopEntity.getFormFactor().name().toLowerCase();
         technicsResponse.technicType = TechnicTypes.DESKTOP.name().toLowerCase();
 
-        castToTechnicsResponse(technicsResponse, desktopEntity.technicsEntity);
+        castToTechnicsResponse(technicsResponse, desktopEntity.getTechnicsEntity());
 
         return technicsResponse;
 
@@ -123,10 +135,10 @@ public abstract class AnyTechService {
         TechnicsResponse technicsResponse = new TechnicsResponse();
 
         technicsResponse.specificFieldType = "diagonal";
-        technicsResponse.specificFieldValue = String.valueOf(displayEntity.diagonal);
+        technicsResponse.specificFieldValue = String.valueOf(displayEntity.getDiagonal());
         technicsResponse.technicType = TechnicTypes.DISPLAY.name().toLowerCase();
 
-        castToTechnicsResponse(technicsResponse, displayEntity.technicsEntity);
+        castToTechnicsResponse(technicsResponse, displayEntity.getTechnicsEntity());
 
         return technicsResponse;
     }
@@ -135,10 +147,10 @@ public abstract class AnyTechService {
         TechnicsResponse technicsResponse = new TechnicsResponse();
 
         technicsResponse.specificFieldType = "volume";
-        technicsResponse.specificFieldValue = String.valueOf(storageEntity.volume);
+        technicsResponse.specificFieldValue = String.valueOf(storageEntity.getVolume());
         technicsResponse.technicType = TechnicTypes.STORAGE.name().toLowerCase();
 
-        castToTechnicsResponse(technicsResponse, storageEntity.technicsEntity);
+        castToTechnicsResponse(technicsResponse, storageEntity.getTechnicsEntity());
 
         return technicsResponse;
     }
@@ -147,17 +159,17 @@ public abstract class AnyTechService {
         TechnicsResponse technicsResponse = new TechnicsResponse();
 
         technicsResponse.specificFieldType = "laptop_diagonal";
-        technicsResponse.specificFieldValue = laptopEntity.diagonal.name();
+        technicsResponse.specificFieldValue = laptopEntity.getDiagonal().name();
         technicsResponse.technicType = TechnicTypes.LAPTOP.name().toLowerCase();
 
-        castToTechnicsResponse(technicsResponse, laptopEntity.technicsEntity);
+        castToTechnicsResponse(technicsResponse, laptopEntity.getTechnicsEntity());
 
         return technicsResponse;
     }
 
     protected static TechnicsResponse castToTypeResponse(TechEntityBase entityBase){
         TechnicsResponse technicsResponse = new TechnicsResponse();
-        castToTechnicsResponse(technicsResponse, entityBase.technicsEntity);
+        castToTechnicsResponse(technicsResponse, entityBase.getTechnicsEntity());
 
         return technicsResponse;
     }
