@@ -87,14 +87,18 @@ public class TechnicsService {
     }
 
     public TechnicsResponse getById(Long id) {
-        TechnicTypes type = technicsRepo.findFirstBySerialNumber(id).technicType;
+        try {
+            TechnicTypes type = technicsRepo.findFirstBySerialNumber(id).technicType;
 
-        switch (type){
-            case DESKTOP: return desktopService.getById(id);
-            case DISPLAY: return displayService.getById(id);
-            case LAPTOP: return laptopService.getById(id);
-            case STORAGE: return storageService.getById(id);
-            default: return null;
+            switch (type){
+                case DESKTOP: return desktopService.getById(id);
+                case DISPLAY: return displayService.getById(id);
+                case LAPTOP: return laptopService.getById(id);
+                case STORAGE: return storageService.getById(id);
+                default: return null;
+            }
+        } catch (NullPointerException e){
+          return null;
         }
     }
 
