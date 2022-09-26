@@ -1,6 +1,6 @@
 # cft_test_task
 # Back-End часть приложения для магазина, торгующего компьютерами и их комплектующими.
-##### [скачать]
+### [скачивание и установка](https://github.com/egorkuzn/cft_test_task/tree/master/install)
 Для каждой категории были созданы репозитории в com.example.cft_test_task.repos.technics, которые заданы следущими сущностями из com.example.cft_test_task.model.entities.technics.
 Для того, чтобы ограничить сущности типов техники, был создан интерфейс com.example.cft_test_task.model.entities.technics.TechEntityBase. В нем определены бызовые get и set для поля
 общих данных товара, без учета особенностей его типа. Это поле получено операцией соединения реляционной алгебры join связью "один к одному". Это позволяет нам использовать удобную 
