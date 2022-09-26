@@ -1,5 +1,5 @@
 # cft_test_task
-Back-End часть приложения для магазина, торгующего компьютерами и их комплектующимию
+# Back-End часть приложения для магазина, торгующего компьютерами и их комплектующими.
 Для каждой категории были созданы репозитории в com.example.cft_test_task.repos.technics, которые заданы следущими сущностями из com.example.cft_test_task.model.entities.technics.
 Для того, чтобы ограничить сущности типов техники, был создан интерфейс com.example.cft_test_task.model.entities.technics.TechEntityBase. В нем определены бызовые get и set для поля
 общих данных товара, без учета особенностей его типа. Это поле получено операцией соединения реляционной алгебры join связью "один к одному". Это позволяет нам использовать удобную 
@@ -26,4 +26,15 @@ public interface TechTypeRepo<TypeEntity extends TechEntityBase> extends JpaRepo
 ### com.example.cft_test_task.CONTROLLER
 1. TechnicsController.java - Rest controller, в котором описаны дествия для соответствующих запросов.  
 
+### com.example.cft_test_task.MODEL
+Здесь хранятся классы, моделирующие сущности для репозиториев, специфические параметры разного типа техники, а также модели REST запросов и ответов: 
+#### com.example.cft_test_task.model.ENTITIES
+В .technics находятся сущности для описания соответствующих им репозиториев. Все они осуществляют интерфейс TechEntityBase.java.
+
+1. DesktopEntity.java -  настольные компьютеры, имеющие форм-фактор: десктопы, неттопы, моноблоки;
+2. LaptopEntity.java - ноутбуки, подразделяемые по размеру: 13, 14, 15, 17 дюймовые;
+3. DisplayEntity.java - мониторы, имеющие диагональ;
+4. StorageEntity.java - жесткие диски, которые имеют объем.
+#### com.example.cft_test_task.model.ENUMS.tech
+#### com.example.cft_test_task.model.REST
 
