@@ -5,6 +5,4 @@ public enum TechnicTypes {
     DISPLAY,
     LAPTOP,
     STORAGE;
-
-
 }

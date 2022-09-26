@@ -1,5 +1,6 @@
 # cft_test_task
 # Back-End часть приложения для магазина, торгующего компьютерами и их комплектующими.
+##### [скачать]
 Для каждой категории были созданы репозитории в com.example.cft_test_task.repos.technics, которые заданы следущими сущностями из com.example.cft_test_task.model.entities.technics.
 Для того, чтобы ограничить сущности типов техники, был создан интерфейс com.example.cft_test_task.model.entities.technics.TechEntityBase. В нем определены бызовые get и set для поля
 общих данных товара, без учета особенностей его типа. Это поле получено операцией соединения реляционной алгебры join связью "один к одному". Это позволяет нам использовать удобную 
@@ -20,21 +21,46 @@ public interface TechTypeRepo<TypeEntity extends TechEntityBase> extends JpaRepo
 Поэтому и был создан такой своеобразный сервис. На этом небольшое введение можно закончить, перейдём к самой структуре:
 
 ### com.example.cft_test_task.CONFIG
-1. SwaggerConfig.java - настройка для Swagger, доступ к которому можно получить по следующей ссылке: http://localhost:8080/swagger-ui.html;
-2. WebConfiguration.java - настройка Spring Boot Web.
+1. **SwaggerConfig.java** - настройка для Swagger, доступ к которому можно получить по следующей ссылке: http://localhost:8080/swagger-ui.html;
+2. **WebConfiguration.java** - настройка Spring Boot Web.
 
 ### com.example.cft_test_task.CONTROLLER
-1. TechnicsController.java - Rest controller, в котором описаны дествия для соответствующих запросов.  
+1. **TechnicsController.java** - Rest controller, в котором описаны дествия для соответствующих запросов.  
 
 ### com.example.cft_test_task.MODEL
 Здесь хранятся классы, моделирующие сущности для репозиториев, специфические параметры разного типа техники, а также модели REST запросов и ответов: 
-#### com.example.cft_test_task.model.ENTITIES
-В .technics находятся сущности для описания соответствующих им репозиториев. Все они осуществляют интерфейс TechEntityBase.java.
+#### .ENTITIES
+В **.technics** находятся сущности для описания соответствующих им репозиториев. Все они осуществляют интерфейс TechEntityBase.java.
 
-1. DesktopEntity.java -  настольные компьютеры, имеющие форм-фактор: десктопы, неттопы, моноблоки;
-2. LaptopEntity.java - ноутбуки, подразделяемые по размеру: 13, 14, 15, 17 дюймовые;
-3. DisplayEntity.java - мониторы, имеющие диагональ;
-4. StorageEntity.java - жесткие диски, которые имеют объем.
-#### com.example.cft_test_task.model.ENUMS.tech
-#### com.example.cft_test_task.model.REST
-
+1. **DesktopEntity.java** -  настольные компьютеры, имеющие форм-фактор: десктопы, неттопы, моноблоки;
+2. **LaptopEntity.java** - ноутбуки, подразделяемые по размеру: 13, 14, 15, 17 дюймовые;
+3. **DisplayEntity.java** - мониторы, имеющие диагональ;
+4. **StorageEntity.java** - жесткие диски, которые имеют объем.
+#### .ENUMS.tech
+1. В **.details** описываются специфические параметры для настольного компьютера и ноутбука (формфактор и диагональ дисплея соотв.);
+2. **TechnicFields.java** - всевозможные изменяемые параметры техники;
+3. **TechnicTypes.java** - типы техники.
+#### .REST
+1. **request.TechnicsRequest.java** - запрос-форма на добавление нового товара;
+2. **response.TechnicsResponse.java** - ответ-форма на получение информации о товаре.
+### com.example.cft_test_task.REPOS
+Репозитории (базы данных), сформированые на базе com.example.cft_test_task.model.ENTITIES
+1. В **.technics** предствлены интерфейсы-наследники JpaRepository<Type, Long>, где type - класс-наследник от
+   TechEntityBase.java из entity.technics. Другими словами: репозитории по типу техники;
+2. **TechnicsRepo.java** - репозиторий всей техники, в котором указаны:
+   * номер серии;
+   * производитель;
+   * цена;
+   * количество единиц продукции на складе;
+3. **TechTypeRepo.java** - generic-класс-сервис для удобной работы с групой репозиториев .technics.
+### com.example.cft_test_task.SERVICE
+**TechnicsService** - сервис, реализующий поведение com.example.cft_test_task.controller.TechnicsController
+#### .TECHNICS
+1. AnyTechService.java - абстрактный класс, который в первоначальном виде был базой сервисов, соответствующих каждому
+типу техники. В процессе он взял на себя сам исполнение функций для конкретных TypeEntity из generic-класса ServiceByTechType.java;
+2. ServiceByTechType.java - generic-класс для исполнения команд REST-запросов. Поэтому он определяет абстрактные методы AnyTechService.java:
+* .add();
+* .edit();
+* .delete();
+* .getById();
+* .getAll();
