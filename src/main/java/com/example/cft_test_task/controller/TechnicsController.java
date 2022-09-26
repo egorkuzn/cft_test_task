@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("technics")
-@Api(value = "technics")
+@Api(description = "Магазин, торгующий компьютерами и комплектующими")
 public class TechnicsController {
     final TechnicsService technicsService;
 
@@ -23,31 +23,31 @@ public class TechnicsController {
     }
 
     @PutMapping
-    @ApiOperation("Добавление нового товара")
+    @ApiOperation("Добавление товара")
     public ResponseEntity<Boolean> add(@RequestBody TechnicsRequest technicsRequest){
         return ResponseEntity.ok().body(technicsService.add(technicsRequest));
     }
 
     @PatchMapping("id/{id}")
-    @ApiOperation("edit")
+    @ApiOperation("Редактирование товара")
     public ResponseEntity<Boolean> edit(@PathVariable Long id, @RequestParam String field, @RequestParam String variable){
         return ResponseEntity.ok().body(technicsService.edit(id, field, variable));
     }
 
     @DeleteMapping("id/{id}")
-    @ApiOperation("delete")
+    @ApiOperation("Удаление товара")
     public ResponseEntity<Boolean> delete(@PathVariable Long id){
         return ResponseEntity.ok().body(technicsService.delete(id));
     }
 
     @GetMapping("id/{id}")
-    @ApiOperation("get by id")
+    @ApiOperation("Просмотр товара по идентификатору")
     public ResponseEntity<TechnicsResponse> getById(@PathVariable Long id){
         return ResponseEntity.ok().body(technicsService.getById(id));
     }
 
     @GetMapping( "type/{type}")
-    @ApiOperation("get by type")
+    @ApiOperation("Просмотр всех существующих товаров по типу")
     public ResponseEntity<List<TechnicsResponse>> getByType(@PathVariable String type){
         return ResponseEntity.ok().body(technicsService.getByType(type));
     }
