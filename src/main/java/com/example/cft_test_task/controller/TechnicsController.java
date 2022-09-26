@@ -23,7 +23,7 @@ public class TechnicsController {
     }
 
     @PutMapping
-    @ApiOperation("add")
+    @ApiOperation("Добавление нового товара")
     public ResponseEntity<Boolean> add(@RequestBody TechnicsRequest technicsRequest){
         return ResponseEntity.ok().body(technicsService.add(technicsRequest));
     }
