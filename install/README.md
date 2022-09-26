@@ -3,7 +3,7 @@
 
 Windows:
 ````
-PS C:\Users\egork> java -jar [Путь дирретории, в которой лежит скачанный файл]\cft_test_task_kuznetsov_yegor.jar
+PS C:\Users\user> java -jar [Путь дирретории, в которой лежит скачанный файл]\cft_test_task_kuznetsov_yegor.jar
 ````
 
 UNIX/Linux/MacOS:
